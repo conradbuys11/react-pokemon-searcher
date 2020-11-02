@@ -26,7 +26,21 @@ class PokemonForm extends React.Component {
   handleSubmit = e => {
     //when click submit, add the data we've put in to our database
     e.preventDefault()
-    
+    let requestPackage = {
+      headers: {'Content-Type':'application/json'},
+      method: 'POST',
+      body: JSON.stringify({
+        name: this.state.name,
+        hp: this.state.hp,
+        sprites: {
+          front: this.state.frontUrl, 
+          back: this.state.backUrl
+        }
+      })
+    }
+    fetch("http://localhost:3000/pokemon", requestPackage)
+    .then(rsp => rsp.json())
+    .then(newPokemon => this.props.buttbutt(newPokemon))
   }
 
   render() {

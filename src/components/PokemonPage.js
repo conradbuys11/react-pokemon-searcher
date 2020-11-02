@@ -20,20 +20,26 @@ class PokemonPage extends React.Component {
     this.fetchPokemon()
   }
 
-  buttFunction = () => {
-
+  buttbutt = (newPokemon) => { 
+    //we cannot use push because push will directly change the whole array but we cannot do that in react because we use setState to update the state
+    //we use concat because it is nondestructable and will only theoritically change our state. it won't change the array
+    let updatedPokemonArray = this.state.pokemon.concat(newPokemon)
+    // array.concat(pokemon) // concat will add something to an array and return the value, but won't change the full array. 
+    this.setState({
+      pokemon: updatedPokemonArray
+    })
   }
 
   render() {
     return (
       <Container>
         <h1>Pokemon Searcher</h1>
-        <br />
-        <PokemonForm />
+        <br /> 
+        <PokemonForm buttbutt={this.buttbutt}/> 
         <br />
         <Search />
         <br />
-        <PokemonCollection pokemon={this.state.pokemon} buttFunction={() => this.buttFunction()}/>
+        <PokemonCollection pokemon={this.state.pokemon} />
       </Container>
     )
   }
