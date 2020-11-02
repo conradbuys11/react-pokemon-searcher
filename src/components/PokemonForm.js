@@ -2,16 +2,43 @@ import React from 'react'
 import { Form } from 'semantic-ui-react'
 
 class PokemonForm extends React.Component {
+
+  state = {
+    name: '',
+    hp: '',
+    frontUrl: '',
+    backUrl: ''
+  }
+
+  handleChange = e => {
+    const {name, value} = e.target
+    //console.log(e.target.value)
+    // this.setState({
+    //   [e.target.name]: e.target.value
+    // })
+    console.log(this.state)
+    this.setState({
+      [name]: value
+    })
+
+  }
+
+  handleSubmit = e => {
+    //when click submit, add the data we've put in to our database
+    e.preventDefault()
+    
+  }
+
   render() {
     return (
       <div>
         <h3>Add a Pokemon!</h3>
-        <Form onSubmit={() => {console.log("submitting form...")}}>
+        <Form onSubmit={this.handleSubmit}>
           <Form.Group widths="equal">
-            <Form.Input fluid label="Name" placeholder="Name" name="name" />
-            <Form.Input fluid label="hp" placeholder="hp" name="hp" />
-            <Form.Input fluid label="Front Image URL" placeholder="url" name="frontUrl" />
-            <Form.Input fluid label="Back Image URL" placeholder="url" name="backUrl" />
+            <Form.Input onChange={this.handleChange} fluid label="Name" placeholder="Name" name="name" />
+            <Form.Input onChange={this.handleChange} fluid label="hp" placeholder="hp" name="hp" />
+            <Form.Input onChange={this.handleChange} fluid label="Front Image URL" placeholder="url" name="frontUrl" />
+            <Form.Input onChange={this.handleChange} fluid label="Back Image URL" placeholder="url" name="backUrl" />
           </Form.Group>
           <Form.Button>Submit</Form.Button>
         </Form>
